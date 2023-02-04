@@ -1,0 +1,80 @@
+{
+    "map_1": {
+        "object": "map_1",
+        "type": "sprite_comp",
+        "layer": "0",
+        "path": "city_1.png",
+        "key": "none key",
+        "pos": [
+            0,
+            200
+        ],
+        "crop_rect": null,
+        "slice_rect": null,
+        "tran_rect": [
+            200,
+            200
+        ],
+        "text": "",
+        "font_sz": "15",
+        "color": [
+            0,
+            0,
+            0
+        ],
+        "anti": "0",
+        "event_trigger": "",
+        "event_val" : "",
+        "event_ans" : ""
+    },
+    "text_1": {
+        "object": "text_1",
+        "type": "text_comp",
+        "layer": "1",
+        "path": "arial.ttf",
+        "key": "my_key",
+        "pos": [
+            0,
+            0
+        ],
+        "crop_rect": null,
+        "slice_rect": null,
+        "tran_rect": null,
+        "text": "hello world",
+        "font_sz": "15",
+        "color": [
+            0,
+            0,
+            0
+        ],
+        "anti": "true",
+        "event_trigger": "",
+        "event_val" : "",
+        "event_ans" : ""
+    },
+    "func_1": {
+        "object": "func_1",
+        "type": "event_comp",
+        "layer": "0",
+        "path": "test.py",
+        "key": "function1",
+        "pos": [
+            0,
+            0
+        ],
+        "crop_rect": null,
+        "slice_rect": null,
+        "tran_rect": null,
+        "text": "",
+        "font_sz": "15",
+        "color": [
+            0,
+            0,
+            0
+        ],
+        "anti": "0",
+        "event_trigger": "display",
+        "event_val" : "n",
+        "event_ans" : "ans"
+    }
+}

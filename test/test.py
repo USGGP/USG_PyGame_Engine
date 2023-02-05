@@ -1,5 +1,8 @@
-def ret_list(n):
-    ans = [i for i in range(n)]
+def event1(n):
+    ans = [i for i in range(int(n))]
     return ans
 
-ans= ret_list(n)
+def event2(a, b):
+    if len(b) < 40:
+        b.append(a)
+    return b

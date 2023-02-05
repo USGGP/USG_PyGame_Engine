@@ -3,7 +3,7 @@
         "object": "map_1",
         "type": "sprite_comp",
         "layer": "0",
-        "path": "city_1.png",
+        "path": "..//test//city_1.png",
         "key": "none key",
         "pos": [
             0,
@@ -24,8 +24,9 @@
         ],
         "anti": "0",
         "event_trigger": "",
-        "event_val" : "",
-        "event_ans" : ""
+        "event_val": "",
+        "event_ans": "",
+        "enable": false
     },
     "text_1": {
         "object": "text_1",
@@ -49,11 +50,12 @@
         ],
         "anti": "true",
         "event_trigger": "",
-        "event_val" : "",
-        "event_ans" : ""
+        "event_val": "",
+        "event_ans": "",
+        "enable": true
     },
-    "func_1": {
-        "object": "func_1",
+    "test_func1": {
+        "object": "test_func1",
         "type": "event_comp",
         "layer": "0",
         "path": "test.py",
@@ -73,8 +75,31 @@
             0
         ],
         "anti": "0",
-        "event_trigger": "display",
-        "event_val" : "n",
-        "event_ans" : "ans"
+        "event_trigger": "ans = event1(n)",
+        "enable": true
+    },
+    "test_func2": {
+        "object": "test_func2",
+        "type": "event_comp",
+        "layer": "0",
+        "path": "test.py",
+        "key": "function1",
+        "pos": [
+            0,
+            0
+        ],
+        "crop_rect": null,
+        "slice_rect": null,
+        "tran_rect": null,
+        "text": "",
+        "font_sz": "15",
+        "color": [
+            0,
+            0,
+            0
+        ],
+        "anti": "0",
+        "event_trigger": "ans = event2(a, b)",
+        "enable": true
     }
 }

@@ -18,6 +18,12 @@ It uses kind of ECS system through pandas table
 4. coding function
 5. click the world start
 
+## Quick Test
+1. Download test folder
+2. Run pgengine.py
+3. Set the path of object and comp json in test folder
+4. Click the world start button
+
 ## other license
 - USG_PyGame_Engine : GNU Affero License
 - PyGame : LGPL License

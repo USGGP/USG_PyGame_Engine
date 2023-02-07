@@ -1,11 +1,13 @@
 GNU Affero License(c) USG Feb, 08 23. 
 
-# USG_PyGame_Engine
+# USG_PyGame_Engine V 0.0.1
 This is pygame engine project
 
 You can easily create 2D game
 
 It uses kind of ECS system through pandas table
+
+Future work : physics, animation, skeleton frame
 
 <img src=https://user-images.githubusercontent.com/47798805/217277074-659e8e5e-43fe-446f-a044-bf38d8e16188.png width="350" height="350"><img src=https://user-images.githubusercontent.com/47798805/217277164-347df1e5-526d-41cf-89d9-0ae46319141c.png width="350" height="350">
 

@@ -127,7 +127,7 @@ def create_obj_window(obj_list: dict, obj_feature: dict = None) -> None:
     # TAB layout
     tab_layout = [sg.Tab('Sprite', sprite_layout, key=CompList.SPRITE),
                   sg.Tab('Text', text_layout, key=CompList.TEXT),
-                  sg.Tab('Func', event_layout, key=CompList.EVENT)]
+                  sg.Tab('Event', event_layout, key=CompList.EVENT)]
     ###################################
     #       main layout format        #
     ###################################
@@ -137,7 +137,7 @@ def create_obj_window(obj_list: dict, obj_feature: dict = None) -> None:
                        file_types=[("png files", "*.png")], size=(9, 1))],
         [sg.Text('OBJECT NAME', size=(10, 1)),
          sg.InputText(obj_feature[CompList.OBJECT], key=CompList.OBJECT, size=(20, 1))],
-        [sg.Text('COMP TYPE', size=(10, 1)),
+        [sg.Text('OBJECT TYPE', size=(10, 1)),
          sg.InputText(CompList.SPRITE, readonly=True, key=CompList.TYPE, size=(20, 1))],
         [sg.Text(COMMON_FEATURE.LAYER, size=(5, 1)),
          sg.InputText(obj_feature[COMMON_FEATURE.LAYER], key=COMMON_FEATURE.LAYER, size=(9, 1)),
@@ -152,7 +152,7 @@ def create_obj_window(obj_list: dict, obj_feature: dict = None) -> None:
         [sg.Multiline(size=(40, 18), key='textbox', auto_refresh=True)],
         [sg.Button("Save")]
     ]
-    window = sg.Window("sprite window", layout, modal=True).Finalize()
+    window = sg.Window("Object window", layout, modal=True).Finalize()
     # Tab Selection
     if obj_feature[CompList.TYPE] == CompList.TEXT:
         window[CompList.TEXT].select()
@@ -266,7 +266,7 @@ def create_comp_window(comp_list: dict, comp_feature: dict = None) -> None:
         comp_feature[COMMON_FEATURE.ENABLE] = True
     layout = [[sg.Multiline(size=(40, 5), key='textbox', auto_refresh=True)],
               [sg.Button("Save")]]
-    window = sg.Window("sprite window", layout, modal=True).Finalize()
+    window = sg.Window("Component window", layout, modal=True).Finalize()
     window['textbox'].Update(value=comp_feature)
     # loop
     while True:

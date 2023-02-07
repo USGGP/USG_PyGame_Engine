@@ -2,9 +2,9 @@
 class CompList:
     OBJECT = 'object'
     TYPE = 'type'
-    SPRITE = 'sprite_comp'
-    TEXT = 'text_comp'
-    EVENT = 'event_comp'
+    SPRITE = 'sprite_obj'
+    TEXT = 'text_obj'
+    EVENT = 'event_obj'
 
 
 class EventList:

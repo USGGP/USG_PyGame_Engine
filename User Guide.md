@@ -44,7 +44,7 @@ Here is example
 ```json
 {
 "target event object name":{
-       "object": "test_func2",
+       "object": "target event object name",
         "type": "event_obj",
         "layer": "0",
         "path": "..//test//test.py",

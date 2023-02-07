@@ -1,4 +1,4 @@
-GNU Affero License Feb 08 23 (c) USG
+GNU Affero License(c) USG Feb, 08 23. 
 
 # USG_PyGame_Engine
 This is pygame engine project

@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
   [
-    name='usg_pygame_engine',
+    name='usg_game_pack',
     version='0.0.1',
     description='usg simple engine for create pygame',
     url='git@github.com:Naptwen/USG_PyGame_Engine.git',

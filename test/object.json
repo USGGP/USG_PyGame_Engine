@@ -1,7 +1,7 @@
 {
     "map_1": {
         "object": "map_1",
-        "type": "sprite_comp",
+        "type": "sprite_obj",
         "layer": "0",
         "path": "..//test//city_1.png",
         "key": "none key",
@@ -30,7 +30,7 @@
     },
     "text_1": {
         "object": "text_1",
-        "type": "text_comp",
+        "type": "text_obj",
         "layer": "1",
         "path": "..//test//arial.ttf",
         "key": "my_key",
@@ -56,7 +56,7 @@
     },
     "test_func1": {
         "object": "test_func1",
-        "type": "event_comp",
+        "type": "event_obj",
         "layer": "0",
         "path": "..//test//test.py",
         "key": "function1",
@@ -80,7 +80,7 @@
     },
     "test_func2": {
         "object": "test_func2",
-        "type": "event_comp",
+        "type": "event_obj",
         "layer": "0",
         "path": "..//test//test.py",
         "key": "function1",

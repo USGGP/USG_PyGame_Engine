@@ -1,3 +1,4 @@
+import os
 from abc import abstractmethod
 
 from usg_game_pack.pgevent import CEvent, set_event, run_python_event
@@ -12,7 +13,6 @@ import json
 import pandas as pd
 
 pd.options.mode.chained_assignment = None
-from threading import Thread
 
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
@@ -27,7 +27,11 @@ class PygameManager:
     """
 
     @abstractmethod
-    def __init__(self, size: tuple, title: str = "USG GAME BY PYGAME") -> None:
+    def __init__(self,
+                 size: tuple,
+                 load_obj_json:str = None,
+                 load_comp_json:str = None,
+                 title: str = "USG GAME BY PYGAME") -> None:
         """
         This initiates the setting
 
@@ -54,12 +58,16 @@ class PygameManager:
             EventList.DISPLAY_EVENT: []
         }
 
-    @abstractmethod
-    def start_thread(self):
-        Thread(target=self._loop).start()
+        print(os.getcwd())
+        if load_obj_json is not None:
+            self.load_obj_json(load_obj_json)
+        if load_comp_json is not None:
+            self.load_comp_json(load_comp_json)
+        print("PyGameManager initializing is finished")
 
     @abstractmethod
     def start(self):
+        print("PyGameManager is started")
         self._loop()
 
     @abstractmethod
@@ -144,9 +152,13 @@ class PygameManager:
         print(self._tabular_object.to_string())
 
     def _component_table_set(self):
+        self._tabular_comp["object"] = self._tabular_comp["object"].astype(str)
+        self._tabular_comp["enable"] = self._tabular_comp["enable"].astype(bool)
         print(self._tabular_comp)
 
     def _run_table(self):
+        if self._tabular_object is None:
+            return
         for index, row in self._tabular_object.iterrows():
             if not row[COMMON_FEATURE.ENABLE]:
                 continue
@@ -182,12 +194,10 @@ class PygameManager:
                     EVENT_FEATURE.EVENT_TRIGGER: row[EVENT_FEATURE.EVENT_TRIGGER],
                 }
                 set_event(temp, **event_feature)
-                trg_comp_list = self._tabular_comp[self._tabular_comp[CompList.OBJECT] == row[CompList.OBJECT]
-                                                   & self._tabular_comp[COMMON_FEATURE.ENABLE] is True].transpose().to_dict()
+                trg_comp_list = self._tabular_comp[(self._tabular_comp[CompList.OBJECT] == row[CompList.OBJECT])& (self._tabular_comp[COMMON_FEATURE.ENABLE] == True)].transpose().to_dict()
                 for key, trg_comp in trg_comp_list.items():
                     run_python_event(temp, trg_comp)
                     self._tabular_comp.loc[key] = pd.Series(trg_comp)
-            print(self._tabular_comp)
 
     @abstractmethod
     def _game_loop(self):
@@ -203,6 +213,9 @@ class PygameManager:
             for event in pg.event.get():
                 if event.type == pg.QUIT:
                     self._done = True
+                    break
             self._screen.fill(WHITE)
             self._run_table()
             pg.display.flip()
+        print("PyGameManager window exit")
+        pg.quit()

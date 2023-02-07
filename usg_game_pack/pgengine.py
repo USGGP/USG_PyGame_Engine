@@ -4,6 +4,7 @@ from usg_game_pack.pgrunner import SPRITE_FEATURE, EventList, COMMON_FEATURE
 from usg_game_pack.pgrunner import TEXT_FEATURE
 from usg_game_pack.pgrunner import EVENT_FEATURE
 from usg_game_pack.pgrunner import CompList
+from usg_game_pack.pgrunner import PygameManager
 import PySimpleGUI as sg
 import os
 
@@ -281,8 +282,11 @@ def create_comp_window(comp_list: dict, comp_feature: dict = None) -> None:
         elif event == "Save":
             try:
                 comp_feature = json.loads(values['textbox'].replace("\'", "\"").replace("None", "null").replace("True",'true').replace("False","false"))
-                comp_list[comp_feature[COMMON_FEATURE.KEY]] = comp_feature
-                print('save component', comp_feature)
+                if comp_feature[COMMON_FEATURE.KEY] is not None:
+                    comp_list[comp_feature[COMMON_FEATURE.KEY]] = comp_feature
+                    print('save component', comp_feature)
+                else:
+                    print('unknown key component can not be saved')
             except:
                 print('save error', comp_feature)
     window.close()
@@ -313,15 +317,20 @@ class EngineWindow:
         comp_edited_btn = sg.Button("Component Edit", size=(10, 2))
         comp_btn_layer = sg.Frame("Component option", [[comp_create_btn], [comp_remove_btn], [comp_edited_btn]])
 
-        btn_layer = [[object_btn_layer, comp_btn_layer]]
+        world_start_btn = sg.Button("World Start", size=(10, 8))
+        world_btn_layer = sg.Frame("World option", [[world_start_btn]])
+
+        btn_layer = [[object_btn_layer, comp_btn_layer, world_btn_layer]]
 
         graphic_layer = sg.Graph(key='-Canvas-',
                                  canvas_size=(400, 400),
                                  graph_bottom_left=(0, 0),
                                  graph_top_right=(400, 400),
                                  background_color='gray')
-        path_file = sg.InputText(os.path.join(os.getcwd(), "../test/temp.json"), key="-FILE PATH-", size=(20, 1))
-        file_io_layer = [sg.Text("Path"), path_file, sg.FileBrowse("Find"), sg.Button("Save"), sg.Button("Load")]
+        obj_path_file = sg.InputText("\\".join([os.getcwd(), "../", "test", "object.json"]), key="-OBJ FILE PATH-", size=(40, 1))
+        comp_path_file = sg.InputText("\\".join([os.getcwd(), "../", "test", "comp.json"]), key="-COMP FILE PATH-", size=(40, 1))
+        obj_file_io_layer = [sg.Text("Obj Path"), obj_path_file, sg.FileBrowse("Find"), sg.Button("Save Object"), sg.Button("Load Object")]
+        comp_file_io_layer = [sg.Text("Comp Path"), comp_path_file, sg.FileBrowse("Find"), sg.Button("Save Comp"), sg.Button("Load Comp")]
         self.obj_list: dict = {}
         self.comp_list: dict = {}
         self.window = None
@@ -331,7 +340,8 @@ class EngineWindow:
         self.select_comp = None
         self.layout = \
             [[graphic_layer, sg.TabGroup([list_tab_layer], enable_events=True)],
-             [file_io_layer],
+             [obj_file_io_layer],
+             [comp_file_io_layer],
              [sg.Column(btn_layer)]]
 
     def _comp_listbox_event(self):
@@ -354,6 +364,12 @@ class EngineWindow:
             print('edit: ', self.comp_list[self.select_comp])
             create_comp_window(self.comp_list, self.comp_list[self.select_comp])
             self._comp_list_update()
+        elif self.event == 'World Start':
+            temp_world = PygameManager(size=(400, 400),
+                                       load_obj_json=self.values["-OBJ FILE PATH-"],
+                                       load_comp_json=self.values["-COMP FILE PATH-"])
+            temp_world.start()
+
 
     def _obj_listbox_event(self):
         if self.event == '-obj_List_Box-':
@@ -397,15 +413,24 @@ class EngineWindow:
             self.event, self.values = self.window.read()
             if self.event == "Exit" or self.event == sg.WIN_CLOSED:
                 break
-            elif self.event == 'Save':
-                print('save json')
-                with open(self.values["-FILE PATH-"], 'w') as json_file:
+            elif self.event == 'Save Object':
+                print('save object json')
+                with open(self.values["-OBJ FILE PATH-"], 'w') as json_file:
                     json.dump(self.obj_list, json_file, indent=4)
-            elif self.event == 'Load':
-                print('load json')
-                with open(self.values["-FILE PATH-"], 'r') as json_file:
+            elif self.event == 'Save Comp':
+                print('save comp json')
+                with open(self.values["-COMP FILE PATH-"], 'w') as json_file:
+                    json.dump(self.comp_list, json_file, indent=4)
+            elif self.event == 'Load Object':
+                print('load object json')
+                with open(self.values["-OBJ FILE PATH-"], 'r') as json_file:
                     self.obj_list = json.load(json_file)
                     self._object_list_update()
+            elif self.event == 'Load Comp':
+                print('load comp json')
+                with open(self.values["-COMP FILE PATH-"], 'r') as json_file:
+                    self.comp_list = json.load(json_file)
+                    self._comp_list_update()
             else:
                 self._obj_listbox_event()
                 self._comp_listbox_event()

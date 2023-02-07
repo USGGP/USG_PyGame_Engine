@@ -1,0 +1,21 @@
+{
+  "character1": {
+    "object": "test_func1",
+    "n": 100,
+    "ans": 0,
+    "enable": true
+  },
+  "character2": {
+    "object": "test_func2",
+    "a": 100,
+    "b": [1,2,3],
+    "ans": 0,
+    "enable": true
+  },
+  "character3": {
+    "object": "test_func1",
+    "n": 100,
+    "ans": 0,
+    "enable": true
+  }
+}

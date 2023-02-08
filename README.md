@@ -1,7 +1,7 @@
 GNU Affero License(c) USG Feb, 08 23. 
 
 # USG_PyGame_Engine V 0.0.1
-This is pygame engine project
+This is pygame engine framework project
 
 You can easily create 2D game
 
